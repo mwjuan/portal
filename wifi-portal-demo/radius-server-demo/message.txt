@@ -1,0 +1,46 @@
+手机连接AP
+手机WIFI IP：172.16.21.3
+登录页里输入：用户名：aaa，密码：111
+radius server收到解码后数据包如下：
+
+{
+  code: 'Access-Request',
+  identifier: 5,
+  length: 146,
+  authenticator: Buffer(16) [Uint8Array] [
+     98,  15,  75, 103,  40,  70,
+    239, 106,   8,  27, 245, 132,
+    102, 232, 230, 183
+  ],
+  attributes: {
+    'User-Name': 'aaa',
+    'User-Password': '111',
+    'NAS-Port': 0,
+    'Service-Type': 'Framed-User',
+    'Framed-Protocol': 'PPP',
+    'Framed-IP-Address': '172.16.21.3',
+    'Called-Station-Id': '68-dd-b7-e2-f9-49',
+    'Calling-Station-Id': 'e2-b7-59-6e-ad-4e',
+    'NAS-Identifier': '68DDB79E3EE6',
+    'Acct-Session-Id': 'e2b7596ead4e-6',
+    'NAS-Port-Type': 'Wireless-802.11',
+    'NAS-Port-Id': 'lan'
+  },
+  raw_attributes: [
+    [ 1, [Buffer [Uint8Array]] ],
+    [ 2, [Buffer [Uint8Array]] ],
+    [ 5, [Buffer [Uint8Array]] ],
+    [ 6, [Buffer [Uint8Array]] ],
+    [ 7, [Buffer [Uint8Array]] ],
+    [ 8, [Buffer [Uint8Array]] ],
+    [ 30, [Buffer [Uint8Array]] ],
+    [ 31, [Buffer [Uint8Array]] ],
+    [ 32, [Buffer [Uint8Array]] ],
+    [ 44, [Buffer [Uint8Array]] ],
+    [ 61, [Buffer [Uint8Array]] ],
+    [ 87, [Buffer [Uint8Array]] ]
+  ]
+}
+
+后台回复数据包时，修改code: 'Access-Accept',
+手机显示连接成功开始上网
