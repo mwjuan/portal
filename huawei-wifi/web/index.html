@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100vw;
+            height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .background {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            border: 1px solid #efefef;
+            width: 500px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .formItem {
+            margin-bottom: 1em;
+        }
+
+        .formItem p {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .formItem input {
+            width: 300px;
+            border: 1px solid #ddd;
+            padding: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .loginButton {
+            border: none;
+            outline: none;
+            background: #ea3e23;
+            color: #fff;
+            padding: 12px 16px;
+            margin-top: 10px;
+            font-size: 15px;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .loginButton:hover {
+            background: #ea3e23;
+        }
+
+        h2 {
+            font-size: 24px;
+            /* text-align: center; */
+            margin-bottom: 1.5em;
+        }
+
+        .warningFlash {
+            margin-bottom: 16px;
+            padding: 8px 15px;
+            font-size: 14px;
+            background: #fff1f0;
+            border: 1px solid #ffa39e;
+            border-radius: 4px;
+        }
+
+        .successFlash {
+            margin-bottom: 16px;
+            padding: 8px 15px;
+            font-size: 14px;
+            background: #e4f7e7;
+            border: 1px solid #acf2b7;
+            border-radius: 4px;
+        }
+    </style>
+    <script type='text/javascript' src="./jquery.min.js"></script>
+    <script type='text/javascript' src="./axios.min.js"></script>
+    <script>
+        let url = `${window.location.href}login`;
+
+        $(function () {
+            $('#loginBtn').on('click', function (e) {
+                e.preventDefault();
+
+                let form = $('#loginForm').get(0);
+                let username = form.username.value;
+                let password = form.password.value;
+
+                axios.post(url, { username, password }).then(res => {
+                    console.log(res.data)
+                    if (res.data.result) {
+                        $('#smsResponseMessage').attr('class', 'successFlash');
+                        $('#smsResponseMessage p').text("successed");
+                    }
+                }).catch((error) => {
+                    if (error.response.data) {
+                        $('#smsResponseMessage').attr('class', 'warningFlash');
+                        $('#smsResponseMessage p').text(`${error.response.data}`);
+                        $('#smsResponseMessage p').text("failed");
+                    }
+                });
+            });
+        })
+    </script>
+</head>
+
+<body>
+    <div class="background">
+        <div class="container">
+            <h2>认 证</h2>
+            <div id="smsResponseMessage">
+                <p></p>
+            </div>
+            <form id='loginForm' action='#' method='get'>
+                <div class='formItem'>
+                    <p>用户名</p>
+                    <input type="text" id="username" value=''>
+                </div>
+                <div class='formItem'>
+                    <p>密码</p>
+                    <input type="password" id="password">
+                </div>
+                <div class='formItem'>
+                    <button type='submit' id='loginBtn' class='loginButton'>登录</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
