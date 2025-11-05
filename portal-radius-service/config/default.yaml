@@ -1,0 +1,38 @@
+########## basic ##########
+service: nova
+port: 19007
+
+########## mongodb ##########
+mongodb: 
+  url: mongodb://localhost:27017/service-nova
+  host: 
+  user: 
+  password: 
+  dbName:
+  authenticationDatabase:
+  backup:
+
+########## logger ########## 
+logger:
+  level: debug
+  file: false
+  console: true
+  serviceType: service-nova
+  dirname: /var/log/service-xxx
+  filename: log-%DATE%.log
+  datePattern: YYYY-MM-DD
+  maxSize: 20m
+  maxFiles: 3d
+
+########## JWT ##########
+security:
+  jwtSecret: QWZZuUjA
+
+########## file path ########## 
+upload: uploads/
+backup: backup/
+
+
+radius: 
+  port: 1812
+  secret: testing123

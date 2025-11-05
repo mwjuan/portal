@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>登录</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100vw;
+      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background: #f1f2f3;
+      color: #333;
+      overflow: hidden;
+    }
+
+    .container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loginWrapper {
+      width: 480px;
+      padding: 2em;
+      background: #fff;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .loginWrapper h2 {
+      font-size: 20px;
+      /* text-align: center; */
+      margin-bottom: 1.5em;
+    }
+
+    /* Style the tab */
+
+    .tab {
+      overflow: hidden;
+      /* border: 1px solid #e8e8e8; */
+      border-bottom: none;
+    }
+
+    /* Style the buttons inside the tab */
+
+    .tab button {
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 12px 0;
+      transition: 0.3s;
+      font-size: 15px;
+      color: #aaa;
+      margin-right: 16px;
+    }
+
+    /* Change background color of buttons on hover */
+
+    .tab button:hover {
+      -webkit-box-shadow: inset 0px -2px 0px 0px #e8e8e8;
+      -moz-box-shadow: inset 0px -2px 0px 0px #e8e8e8;
+      box-shadow: inset 0px -2px 0px 0px #e8e8e8;
+      color: #666;
+    }
+
+    /* Create an active/current tablink class */
+
+    .tab button.active {
+      color: #333;
+      background: #fff;
+      font-weight: 500;
+      z-index: 999;
+      /* border-bottom: 2px solid #2F54EB; */
+      -webkit-box-shadow: inset 0px -2px 0px 0px #2f54eb;
+      -moz-box-shadow: inset 0px -2px 0px 0px #2f54eb;
+      box-shadow: inset 0px -2px 0px 0px #2f54eb;
+    }
+
+    /* Style the tab content */
+
+    .tabcontent {
+      display: none;
+      padding: 24px 0;
+      background: #fff;
+      /* border: 1px solid #e8e8e8; */
+      border-top: none;
+    }
+
+    .tabcontent.show {
+      display: block;
+    }
+
+    .formItem {
+      margin-bottom: 1em;
+    }
+
+    .formItem p {
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    .formItem input {
+      width: 100%;
+      border: 1px solid #ddd;
+      padding: 8px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .smsInput {
+      display: flex;
+      border: 1px solid #ddd;
+    }
+
+    .smsInput input {
+      border: none;
+      outline: none;
+    }
+
+    .smsInput button {
+      flex: 0 0 25%;
+      border: none;
+      background: #fff;
+      color: #2f54eb;
+      font-size: 13px;
+    }
+
+    .smsInput button.disable {
+      color: rgba(0, 0, 0, 0.65);
+    }
+
+    .loginButton {
+      border: none;
+      outline: none;
+      background: #2f54eb;
+      color: #fff;
+      padding: 12px 16px;
+      margin-top: 10px;
+      font-size: 15px;
+      width: 100%;
+      transition: 0.3s;
+    }
+
+    .loginButton:hover {
+      background: #597ef7;
+    }
+
+    .warningFlash {
+      margin-bottom: 16px;
+      padding: 8px 15px;
+      font-size: 14px;
+      background: #fff1f0;
+      border: 1px solid #ffa39e;
+      border-radius: 4px;
+    }
+
+    .successFlash {
+      margin-bottom: 16px;
+      padding: 8px 15px;
+      font-size: 14px;
+      background: #e4f7e7;
+      border: 1px solid #acf2b7;
+      border-radius: 4px;
+    }
+
+    .disable {
+      color: rgba(0, 0, 0, 0.65);
+    }
+
+    .warningFeishu {
+      display: flex;
+      width: 480px;
+      margin-bottom: 16px;
+      padding: 16px;
+      font-size: 13px;
+      line-height: 21px;
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 4px;
+      color: #777;
+    }
+
+    .feishu-logo {
+      width: 48px;
+      height: 48px;
+      margin-right: 24px;
+    }
+
+    ::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      font-size: 14px;
+      color: #aaa;
+      /* Firefox */
+    }
+
+    :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    ::-ms-input-placeholder {
+      /* Microsoft Edge */
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .loginWrapper {
+        width: 340px;
+        box-shadow: none;
+        padding: 16px;
+      }
+
+      .warningFeishu {
+        width: 340px;
+        flex-direction: column;
+        font-size: 12px;
+      }
+
+      .warningFeishu img {
+        display: none;
+      }
+
+      .container {
+        display: flex;
+      }
+    }
+  </style>
+  <script type="text/javascript" src="./js/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/md5.min.js"></script>
+  <script type="text/javascript" src="./js/axios.min.js"></script>
+  <script>
+    function isEmpty(str) {
+      return str == null || str == '' || str.trim() == ''
+    }
+
+    let url = 'http://172.16.28.1:8000/login'
+
+    $(function () {
+      $('#loginBtn').on('click', function (e) {
+        e.preventDefault();
+        let _username = $('#username').val();
+        let _password = $('#password').val();
+        if (isEmpty(_username)) {
+          alert('请输入用户名');
+          return;
+        }
+        if (isEmpty(_password)) {
+          alert('请输入密码');
+          return;
+        }
+
+        url += "?username=" + encodeURIComponent(_username);
+        url += "&password=" + encodeURIComponent(_password);
+        window.location.href = url;
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="loginWrapper">
+      <h2>WiFi 登录</h2>
+
+      <div class="tab"></div>
+
+      <div class="tabcontent show">
+        <form id="loginForm" action="#" method="get">
+          <div class="formItem">
+            <p>用户名</p>
+            <input type="text" id="username" />
+          </div>
+          <div class="formItem">
+            <p>密码</p>
+            <input type="password" id="password" />
+          </div>
+          <div class="formItem">
+            <button type="submit" id="loginBtn" class="loginButton">登录</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

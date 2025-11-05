@@ -1,0 +1,29 @@
+{
+	"compilerOptions": {
+		"baseUrl": "./src",
+		"paths": {
+			"server/*": [
+				"src/server/*"
+			],
+			"service/*": [
+				"src/service/*"
+			],
+			"model/*": [
+				"src/model/*"
+			],
+			"infra/*": [
+				"src/infra/*"
+			],
+			"misc/*": [
+				"src/misc/*"
+			],
+		}
+	},
+	"exclude": [
+		"node_modules",
+		"dist"
+	],
+	"include": [
+		"src"
+	]
+}
